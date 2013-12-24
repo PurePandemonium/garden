@@ -92,6 +92,7 @@ function CheckWin(){
 }
 
 function SaveGame() {
+   Notify("Game saved!");
    localStorage['player'] = btoa(JSON.stringify(Player));
 }
 

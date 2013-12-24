@@ -73,4 +73,11 @@ var Interface = {
 
 }
 
+function Notify(text){
+    var currentdate = new Date(); 
+    var time = currentdate.getHours() + ":" + currentdate.getMinutes();
+    console.log(text);
+    $("#gamelog").append("<br>" + time + " " + text);
+}
+
 
