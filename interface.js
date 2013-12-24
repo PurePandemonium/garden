@@ -4,10 +4,13 @@ function InitializeTools(){
         var Tool = Player.Tools[k];
 		var toolBox = $('<div>')
 			.addClass('toolBox')
-			.addClass('hidden')
 			.attr('id','toolBox_' + k)
 			.text(Tool.name + " ");
-			
+		
+        if (Tool.locked){
+            toolBox.addClass('hidden');
+        }
+        
 		var buyButton = $('<button>')
 			.addClass('toolBtn')
 			
