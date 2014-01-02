@@ -4,10 +4,13 @@ function InitializeTools(){
         var Tool = Player.Tools[k];
 		var toolBox = $('<div>')
 			.addClass('toolBox')
-			.addClass('hidden')
 			.attr('id','toolBox_' + k)
 			.text(Tool.name + " ");
-			
+		
+        if (Tool.locked){
+            toolBox.addClass('hidden');
+        }
+        
 		var buyButton = $('<button>')
 			.addClass('toolBtn')
 			
@@ -68,6 +71,13 @@ var Interface = {
 		$("#toolBox_" + tool).addClass("hidden");
 	},
 
+}
+
+function Notify(text){
+    var currentdate = new Date(); 
+    var time = currentdate.getHours() + ":" + (currentdate.getMinutes()<10?'0':'') + currentdate.getMinutes();
+    console.log(text);
+    $("#gamelog").append("<br>" + time + " " + text);
 }
 
 

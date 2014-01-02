@@ -44,6 +44,7 @@ function BuyTool(toolname){
 }
 
 function Initialize(){
+    LoadGame();
 	InitializeTools();
 	RefreshResources();
 	GameLoop();
@@ -62,7 +63,7 @@ function GameStep(){
 		Interface.Reveal("player");
 	}
 	CheckWin();
-	
+	Autosave();
 }
 
 function UnlockTools(tool){
@@ -83,13 +84,34 @@ function CheckWin(){
 		clearInterval(gameLoopInterval);
 		for (var k in Player.Tools){
 			Player.Tools[k].locked = true;
-			Interface.Hide(k);
-		
+			Interface.Hide(k);		
 		}
-		RefreshResources();
-		
+		RefreshResources();		
 	}
 
 }
 
+function SaveGame() {
+   Notify("Game saved!");
+   localStorage['player'] = btoa(JSON.stringify(Player));
+}
+
+function LoadGame() {
+    if (!localStorage['player']) return;
+    var saveData = JSON.parse(atob(localStorage['player']));
+    Player = saveData;
+    RefreshResources();
+}
+
+var saveCountdown = 30;
+function Autosave(){
+    if (saveCountdown <= 0){
+        SaveGame();
+        saveCountdown = 30;
+        console.log("Game saved!");
+    }
+    else {
+        saveCountdown--;
+    }
+}
 
