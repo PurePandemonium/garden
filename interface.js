@@ -76,8 +76,19 @@ var Interface = {
 function Notify(text){
     var currentdate = new Date(); 
     var time = currentdate.getHours() + ":" + currentdate.getMinutes();
+    var autoscroll = false;
     console.log(text);
-    $("#gamelog").append($("<div>").text(time + " " + text).addClass("notification"));
+    
+    var log = document.getElementById("gamelog");
+    if (log.scrollHeight - log.clientHeight == log.scrollTop){
+        autoscroll = true;
+    }
+    $(log).append($("<div>").text(time + " " + text).addClass("notification"));
+    
+    if (autoscroll){
+        log.scrollTop = log.scrollHeight;
+        //setTimeout( function(){log.scrollTop = log.scrollHeight}, 100);
+    }   
 }
 
 

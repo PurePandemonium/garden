@@ -109,7 +109,6 @@ function Autosave(){
     if (saveCountdown <= 0){
         SaveGame();
         saveCountdown = 30;
-        console.log("Game saved!");
     }
     else {
         saveCountdown--;
