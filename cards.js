@@ -92,7 +92,7 @@ function CheckWin(){
 }
 
 function SaveGame() {
-   Notify("Game saved!");
+   Notify("Game saved.");
    localStorage['player'] = btoa(JSON.stringify(Player));
 }
 
@@ -101,6 +101,7 @@ function LoadGame() {
     var saveData = JSON.parse(atob(localStorage['player']));
     Player = saveData;
     RefreshResources();
+    Notify("Game Loaded. Welcome back, traveller.");
 }
 
 var saveCountdown = 30;
