@@ -1,8 +1,10 @@
 var Data = {
-Tools: {},
-Upgrades: {},
+    Tools: {},
+    Upgrades: {}
+
+}
 //Static tool info
-Tool: function(Name, Identifier) {
+Data.Tool = function(Name, Identifier) {
     this.name = Name;
     this.id = Identifier;
     this.cost = 10;
@@ -10,16 +12,16 @@ Tool: function(Name, Identifier) {
     this.CheckUnlockCond = function(){return DebugMode;};
     this.Income = function(){return this.income};
     
-},
+}
 
 // Info about a tool that needs to be saved
-PlayerTool: function(Identifier) {
+Data.PlayerTool = function(Identifier) {
     this.id = Identifier;
     this.count = 0;
     this.unlocked = false;
-},
+}
 
-InitializeTools: function() {
+Data.InitializeTools = function(){
     var t = new Data.Tool("Casual Player", 'player');
     t.cost = 10;
     t.income = 1;
@@ -69,10 +71,10 @@ InitializeTools: function() {
     Data.Tools[t.id] = t;
     Player.Tools[t.id] = new Data.PlayerTool(t.id);
     
-},
+}
 
 // Static upgrade info
-Upgrade: function(Name, Identifier) {
+Data.Upgrade = function(Name, Identifier) {
     this.name = Name;
     this.id = Identifier;
     this.desc = "Words cannot describe this.";
@@ -86,17 +88,26 @@ Upgrade: function(Name, Identifier) {
     this.revealed = false; // Visible. Upgrades should be easier to make visible than to unlock.  
     this.unlocked = false; // Some condition other than cost to be able to buy it. 
     this.icon = "missing icon.png"
-},
+}
+
+Data.Upgrade.prototype.CalcEff = function() {
+    return this.EstProfit / this.cost;
+}
+
+Data.Upgrade.prototype.toString = function() {
+    return "Upgrade: " + this.name;
+}
 
 // Info about an upgrade that needs to be saved
-PlayerUpgrade: function(Identifier) {
+Data.PlayerUpgrade = function(Identifier) {
     this.id = Identifier
     this.revealed = false;
     this.unlocked = false;
     this.owned = false;
-},
+    this.previousKnowledge = false; // Upgrades owned in a past life should be revealed
+}
 
-InitializeUpgrades: function() {
+Data.InitializeUpgrades = function() {
     var u = new Data.Upgrade("Veteran Card Slinger", 'veterancy');
     u.desc = "This all looks pretty familiar.";
     u.desc_effect = " +10 c/s for each time you've won the game.";
@@ -113,14 +124,5 @@ PlayerUpgrade: function(Identifier) {
     u.CheckRevealCond = function(){return Player.Tools.player.total > 10};
     Data.Upgrades[u.id] = u;
     Player.Upgrades[u.id] = new Data.PlayerUpgrade(u.id);
-},
-
 }
 
-Data.Upgrade.prototype.CalcEff = function() {
-    return this.EstProfit / this.cost;
-}
-
-Data.Upgrade.prototype.toString = function() {
-    return "Upgrade: " + this.name;
-}
