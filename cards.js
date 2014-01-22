@@ -5,6 +5,7 @@
 
 var VERSION = 0.01;
 var DebugMode = false;
+
 $(function() {
 	Initialize();
 });
@@ -49,8 +50,8 @@ function BuyTool(toolname){
 }
 
 function Initialize(){
-    InitializeTools();
-    InitializeUpgrades();
+    Data.InitializeTools();
+    Data.InitializeUpgrades();
     LoadGame();
     InitializeToolInterface();
 	RefreshResources();
