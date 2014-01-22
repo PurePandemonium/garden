@@ -12,15 +12,7 @@ $(function() {
 
 var Player = {
     cards: 0,
-    Tools: {
-        'player':{name:"Casual Player", total:0, cost:10, income: 1, locked:true},
-        'shark':{name:"Card Shark", total:0, cost:50, income: 4, locked:true},
-        'club':{name:"Collector's Club", total:0, cost:100, income: 6, locked:true},
-        'printer':{name:"Inkjet Printer", total:0, cost:500, income: 24, locked:true},
-        'shop':{name:"Card Shop", total:0, cost:1000, income: 36, locked:true},
-        'industrialprinter':{name:"Industrial Printer", total:0, cost:5000, income: 144, locked:true},
-        'factory':{name:"Card Factory", total:0, cost:10000, income: 216, locked:true},
-    },
+    Tools: {},
     Upgrades: {},
 	income: 0,
     wins: 0
