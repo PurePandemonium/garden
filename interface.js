@@ -1,4 +1,4 @@
-function InitializeTools(){
+function InitializeToolInterface(){
     
 	for (var k in Player.Tools){
         var Tool = Player.Tools[k];
