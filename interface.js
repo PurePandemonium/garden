@@ -87,7 +87,6 @@ function Notify(text){
     
     if (autoscroll){
         log.scrollTop = log.scrollHeight;
-        //setTimeout( function(){log.scrollTop = log.scrollHeight}, 100);
     }   
 }
 

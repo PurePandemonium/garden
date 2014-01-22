@@ -97,7 +97,10 @@ function SaveGame() {
 }
 
 function LoadGame() {
-    if (!localStorage['player']) return;
+    if (!localStorage['player']){
+        Notify("New game started. Hello, traveller!");
+        return;
+    }
     var saveData = JSON.parse(atob(localStorage['player']));
     Player = saveData;
     RefreshResources();
