@@ -13,15 +13,14 @@ $(function() {
 
 var Player = {};
 
-function Reset(){
-    Player = {
-    version: 0,
-    cards: 0,
-    Tools: {},
-    Upgrades: {},
-	income: 0,
-    wins: 0
-    }
+// Saveable game data goes in here
+function Game(){
+    this.version = 0;
+    this.cards = 0;
+    this.Tools = {};
+    this.Upgrades = {};
+	this.income = 0;
+    this.wins = 0;
 }
 
 
@@ -55,6 +54,8 @@ function Initialize(){
     InitializeToolInterface();
     Interface.InitializeUpgrades();
 	RefreshResources();
+    UnlockTools();
+    UnlockUpgrades();
 	GameLoop();
 }
 
@@ -112,8 +113,12 @@ function CheckWin(){
 }
 
 function SaveGame() {
-   Notify("Game saved.");
-   localStorage['player'] = btoa(JSON.stringify(Player));
+    var saveData = new Game();
+    for (var i in saveData){
+        saveData[i] = Player[i];
+    }
+    Notify("Game saved.");
+    localStorage['player'] = btoa(JSON.stringify(saveData));
 }
 
 function LoadGame() {
@@ -125,6 +130,8 @@ function LoadGame() {
     
     var saveData = JSON.parse(atob(localStorage['player']));
     
+    
+    
     if (saveData.version == undefined) {
         Reset();
         Player.version = VERSION;
@@ -132,7 +139,10 @@ function LoadGame() {
         return;
     } 
     
-    Player = saveData;
+    Player = new Game();
+    for (var i in Player){
+        Player[i] = saveData[i];
+    }
     Notify("Game Loaded. Welcome back, traveller.");
 }
 
@@ -147,6 +157,6 @@ function Autosave(){
     }
 }
 
-function HasAchievement(){
+function HasAchievement(chievo){
     return true;
 }

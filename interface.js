@@ -7,9 +7,9 @@ function InitializeToolInterface(){
 			.attr('id','toolBox_' + id)
 			.text(Tool.name + " ");
 		
-        if (Player.Tools[id].locked){
-            $toolBox.addClass('hidden');
-        }
+        
+        $toolBox.addClass('hidden');
+        
         
 		var $buyButton = $('<button>')
 			.addClass('toolBtn')
