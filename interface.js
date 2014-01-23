@@ -63,19 +63,23 @@ function Round(number){
 
 var Interface = {
 	Reveal: function(tool_id){
-		$("#toolBox_" + tool_id).removeClass("hidden");
+        $("#toolBox_" + tool_id).fadeIn();
+		//$("#toolBox_" + tool_id).removeClass("hidden");
 	},
 	
 	Hide: function(tool_id){
-		$("#toolBox_" + tool_id).addClass("hidden");
+        $("#toolBox_" + tool_id).fadeOut();
+		//$("#toolBox_" + tool_id).addClass("hidden");
 	},
     
     RevealUpgrade: function(upgrade_id){
-        $("#upgradeBox_" + upgrade_id).removeClass("hidden");
+        $("#upgradeBox_" + upgrade_id).fadeIn();
+        // $("#upgradeBox_" + upgrade_id).removeClass("hidden");
     },
     
     HideUpgrade: function(upgrade_id){
-        $("#upgradeBox_" + upgrade_id).addClass("hidden");
+        $("#upgradeBox_" + upgrade_id).fadeOut();
+        //$("#upgradeBox_" + upgrade_id).addClass("hidden");
     },
     
     InitializeUpgrades: function(){
