@@ -1,75 +1,115 @@
 function InitializeToolInterface(){
     
-	for (var k in Player.Tools){
-        var Tool = Player.Tools[k];
-		var toolBox = $('<div>')
+	for (var id in Data.Tools){
+        var Tool = Data.Tools[id];
+		var $toolBox = $('<div>')
 			.addClass('toolBox')
-			.attr('id','toolBox_' + k)
+			.attr('id','toolBox_' + id)
 			.text(Tool.name + " ");
 		
-        if (Tool.locked){
-            toolBox.addClass('hidden');
+        if (Player.Tools[id].locked){
+            $toolBox.addClass('hidden');
         }
         
-		var buyButton = $('<button>')
+		var $buyButton = $('<button>')
 			.addClass('toolBtn')
 			
-			.attr('id', 'toolBtn_' + k)
-			.attr('onClick',"BuyTool('" + k + "')")
+			.attr('id', 'toolBtn_' + id)
+			.attr('onClick',"BuyTool('" + id + "')")
 			.text("Buy 1 " + Tool.name);
 				
-		var toolPrice = $('<span>')
+		var $toolPrice = $('<span>')
 			.addClass('price')
-			.attr('id','cost_' + k);
+			.attr('id','cost_' + id);
 			
 			
-		var toolTotal = $('<span>')
+		var $toolTotal = $('<span>')
 			.addClass('toolTotal')
-			.attr('id','total_' + k);
+			.attr('id','total_' + id);
 		
-		var toolIncome = $('<div>')
+		var $toolIncome = $('<div>')
 			.addClass('toolIncome')
-			.attr('id','income_per_' + k);
+			.attr('id','income_per_' + id);
 		
-		var totalIncome = $('<div>')
-			.attr('id','total_income_' + k);
-		buyButton.append(toolPrice);
+		var $totalIncome = $('<div>')
+			.attr('id','total_income_' + id);
+		$buyButton.append($toolPrice);
 		
-		toolBox.append(buyButton, toolTotal, toolIncome, totalIncome);
+		$toolBox.append($buyButton, $toolTotal, $toolIncome, $totalIncome);
 		
-		toolBox.appendTo('#tools');
-		RefreshTool(k);
+		$toolBox.appendTo('#tools');
+		RefreshTool(id);
     }
-	
-
 }
 
-function RefreshTool(tool){
-	var Tool = Player.Tools[tool];
-	$("#cost_"+tool).text("(" + Math.round(Player.Tools[tool].cost) + " cards)");
-	$("#total_"+tool).text("Total: " + Player.Tools[tool].total);
-	$("#income_per_" + tool).text("Produces: " + Player.Tools[tool].income + " C/s");
-	$("#total_income_" + tool).text("Income: " +Tool.income * Tool.total + " C/s");
+function RefreshTool(tool_id){
+	var Tool = Player.Tools[tool_id];
+	$("#cost_"+tool_id).text("(" + Math.round(Tool.curCost) + " cards)");
+	$("#total_"+tool_id).text("Total: " + Tool.count);
+	$("#income_per_" + tool_id).text("Produces: " + Data.Tools[tool_id].Income() + " C/s");
+	$("#total_income_" + tool_id).text("Income: " + Data.Tools[tool_id].Income() * Tool.count + " C/s");
 }
 
 function RefreshResources(){
 	$("#stat_cards").text(Player.cards + " Cards");
 	$("#stat_income").text("Total Income: " + Player.income + " C/s");
-
 }
+
+
 
 function Round(number){
 	return Math.round(number);
 }
 
 var Interface = {
-	Reveal: function(tool){
-		$("#toolBox_" + tool).removeClass("hidden");
+	Reveal: function(tool_id){
+		$("#toolBox_" + tool_id).removeClass("hidden");
 	},
 	
-	Hide: function(tool){
-		$("#toolBox_" + tool).addClass("hidden");
+	Hide: function(tool_id){
+		$("#toolBox_" + tool_id).addClass("hidden");
 	},
+    
+    RevealUpgrade: function(upgrade_id){
+        $("#upgradeBox_" + upgrade_id).removeClass("hidden");
+    },
+    
+    HideUpgrade: function(upgrade_id){
+        $("#upgradeBox_" + upgrade_id).addClass("hidden");
+    },
+    
+    InitializeUpgrades: function(){
+        for (var id in Data.Upgrades) {
+            var u = Data.Upgrades[id];
+            var $upgradeBox = $('<div>')
+			.addClass('upgradeBox')
+			.attr('id','upgradeBox_' + id)
+			.text(u.name + " ");
+		
+        if (Player.Upgrades[id].locked){
+            $upgradeBox.addClass('hidden');
+        }
+        
+		var $buyButton = $('<button>')
+			.addClass('upgradeBtn')
+			
+			.attr('id', 'upgradeBtn_' + id)
+			.attr('onClick',"BuyUpgrade('" + id + "')")
+			.text("Upgrade: " + u.name);
+				
+		var $upgradePrice = $('<span>')
+			.addClass('price')
+			.attr('id','cost_' + id);
+
+		$buyButton.append($upgradePrice);
+		
+		$upgradeBox.append($buyButton);
+		
+		$upgradeBox.appendTo('#upgrades_pane');
+        
+        }
+    
+    }
 
 }
 

@@ -3,19 +3,25 @@
 // aka A Place to Start
 // uses jquery
 
-var VERSION = 0.01;
+var VERSION = 0.02;
 var DebugMode = false;
+var toolCostMultiplier = 1.15;
 
 $(function() {
 	Initialize();
 });
 
-var Player = {
+var Player = {};
+
+function Reset(){
+    Player = {
+    version: 0,
     cards: 0,
     Tools: {},
     Upgrades: {},
 	income: 0,
     wins: 0
+    }
 }
 
 
@@ -26,26 +32,28 @@ function CollectCard(){
 	RefreshResources();
 }
 
-function BuyTool(toolname){
-    var tool = Player.Tools[toolname];
-	var price = Math.round(tool.cost);
+function BuyTool(tool_id){
+    var pt = Player.Tools[tool_id];
+    var dt = Data.Tools[tool_id];
+	var price = Math.round(pt.curCost);
     if (price <= Player.cards){
 			Player.cards -= price;
-			tool.total++;
-			tool.cost *= 1.15;
-			//tool.cost = Math.ceil(tool.cost);
-			Player.income += tool.income;
-			RefreshTool(toolname);
+			pt.count++;
+			pt.curCost *= 1.15;
+			Player.income += dt.Income();
+			RefreshTool(tool_id);
 			RefreshResources();
-			UnlockTools(toolname);
+			UnlockTools();
+            UnlockUpgrades();
 	}
 }
 
 function Initialize(){
-    Data.InitializeTools();
-    Data.InitializeUpgrades();
     LoadGame();
+    Data.InitializeUpgrades();
+    Data.InitializeTools();
     InitializeToolInterface();
+    Interface.InitializeUpgrades();
 	RefreshResources();
 	GameLoop();
 }
@@ -66,14 +74,27 @@ function GameStep(){
 	Autosave();
 }
 
-function UnlockTools(tool){
-	var Tool = Player.Tools[tool];
-	for (var k in Player.Tools){
-		if (Player.Tools[k].locked && Tool.cost * 1.5 > Player.Tools[k].cost){
-			Player.Tools[k].locked = false;
-			Interface.Reveal(k);
-		}
+function UnlockTools(){
+	for (var k in Data.Tools){
+        if (Data.Tools[k].CheckUnlockCond()){
+            Player.Tools[k].locked = false;
+            Interface.Reveal(k);
+        }
 	}
+}
+
+function UnlockUpgrades(){
+    for (var id in Data.Upgrades){
+        if (Data.Upgrades[id].CheckUnlockCond()){
+            Player.Upgrades[id].locked = false;
+            Interface.RevealUpgrade(id);
+        }
+	}
+}
+
+function CurrentCost(tool){
+    var cost = Player.Tools[tool].count * Data.Tools[tool].cost ^ toolCostMultiplier;
+    return cost;
 }
 
 function CheckWin(){
@@ -88,7 +109,6 @@ function CheckWin(){
 		}
 		RefreshResources();		
 	}
-
 }
 
 function SaveGame() {
@@ -99,11 +119,20 @@ function SaveGame() {
 function LoadGame() {
     if (!localStorage['player']){
         Notify("New game started. Hello, traveller!");
+        Player.version = VERSION;
         return;
     }
+    
     var saveData = JSON.parse(atob(localStorage['player']));
+    
+    if (saveData.version == undefined) {
+        Reset();
+        Player.version = VERSION;
+        Notify("New game started. Hello, traveller!");
+        return;
+    } 
+    
     Player = saveData;
-    RefreshResources();
     Notify("Game Loaded. Welcome back, traveller.");
 }
 
@@ -118,3 +147,6 @@ function Autosave(){
     }
 }
 
+function HasAchievement(){
+    return true;
+}
