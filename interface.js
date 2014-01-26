@@ -113,10 +113,23 @@ var Interface = {
         
         }
     
-    }
-
+    },
+    
+    InitializeTabs: function(){
+        $("#tab_notifications").click(function(){SelectTab("notifications")});
+        $("#tab_about").click("TabSelect('about')");
+        $("#tab_config").click("TabSelect('config')");
+    
+    },
 }
 
+function SelectTab(tab){
+    $(".tab").removeClass("selected");
+    $("#tab_" + tab).addClass("selected");
+    $(".pane").fadeOut();
+    $("#pane_" + tab).fadeIn();
+
+}
 function Notify(text){
     var currentdate = new Date(); 
     var time = currentdate.getHours() + ":" + currentdate.getMinutes();

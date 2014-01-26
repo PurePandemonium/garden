@@ -13,11 +13,17 @@
 </head>
 <body>
 <div id="main_wrapper">
-    <div id="log_wrapper" class="column">
-        <div>Notifications</div>
-        <div id="gamelog">
+    <div id="info_tabs" class="tab_header">
+        <div id="tab_notifications" class="tab">Notifications</div>
+        <div id="tab_about" class="tab">About</div>
+        <div id="tab_config" class="tab">Settings</div>
+    </div>
+    <div id="info_panes" class="panes_wrapper">
+        <div id="pane_notifications" class="pane">
+            <div id="gamelog"></div>
         </div>
     </div>
+
     <div id="tools_wrapper" class="column">
         <button onclick="CollectCard()">Collect Card!</button>
         <div id="info">

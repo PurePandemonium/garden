@@ -53,6 +53,7 @@ function Initialize(){
     Data.InitializeTools();
     InitializeToolInterface();
     Interface.InitializeUpgrades();
+    Interface.InitializeTabs();
 	RefreshResources();
     UnlockTools();
     UnlockUpgrades();
