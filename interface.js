@@ -117,18 +117,23 @@ var Interface = {
     
     InitializeTabs: function(){
         $("#tab_notifications").click(function(){SelectTab("notifications")});
-        $("#tab_about").click("TabSelect('about')");
-        $("#tab_config").click("TabSelect('config')");
-    
+        $("#tab_about").click(function(){SelectTab("about")});
+        $("#tab_config").click(function(){SelectTab("config")});
+        SelectTab("notifications");
     },
 }
 
 function SelectTab(tab){
-    $(".tab").removeClass("selected");
-    $("#tab_" + tab).addClass("selected");
-    $(".pane").fadeOut();
-    $("#pane_" + tab).fadeIn();
-
+    if (!$("#tab_" + tab).hasClass("selected")){
+        $(".tab,.pane").stop(true,false);
+        
+        $(".tab").removeClass("selected");
+        $("#tab_" + tab).addClass("selected");
+        $(".pane").fadeOut('fast');
+        $(".pane").promise().done(function(){
+            $("#pane_" + tab).fadeIn('fast');
+        });
+    }
 }
 function Notify(text){
     var currentdate = new Date(); 
