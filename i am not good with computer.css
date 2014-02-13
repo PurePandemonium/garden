@@ -10,21 +10,21 @@ div .toolBox {
     padding: 1px;
 }
 
-.toolTotal{
+div .toolTotal{
     margin-left: 10px;
 }
 
-.hidden{
+div .hidden{
     display: none;
 }
 
-.column{
+div .column{
     width: 30%;
     float: left;
     margin:10px;
 }
 
-.tab_header{
+div .tab_header{
     height:20px;
     padding-bottom: 5px;
 }
@@ -51,11 +51,17 @@ div.tab.selected{
     font-weight: bold;
 }
 
-.panes_wrapper{
+div .panes_wrapper{
     width: 30%;
     float: left;
     margin:10px;
 }
+
+button {
+    cursor: pointer;
+
+}
+
 
 #main_wrapper{
     margin: auto;
