@@ -125,7 +125,7 @@ var Interface = {
 
 function SelectTab(tab){
     if (!$("#tab_" + tab).hasClass("selected")){
-        $(".tab,.pane").stop(true,false);
+        $(".tab,.pane").stop(true,false); //instant finish animations, and clear queued animations
         
         $(".tab").removeClass("selected");
         $("#tab_" + tab).addClass("selected");
