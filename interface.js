@@ -48,6 +48,9 @@ function RefreshTool(tool_id){
 	$("#total_"+tool_id).text("Total: " + Tool.count);
 	$("#income_per_" + tool_id).text("Produces: " + Data.Tools[tool_id].Income() + " C/s");
 	$("#total_income_" + tool_id).text("Income: " + Data.Tools[tool_id].Income() * Tool.count + " C/s");
+    if (Tool.revealed){
+        Interface.Reveal(tool_id);
+    }
 }
 
 function RefreshResources(){
@@ -121,7 +124,24 @@ var Interface = {
         $("#tab_config").click(function(){SelectTab("config")});
         SelectTab("notifications");
     },
+    
+    RefreshTools: function(){
+        for (var id in Data.Tools){
+            if (Player.Tools[id].locked){
+                Interface.Hide(id);
+            }
+        }
+    },
+    
+    RefreshUpgrades: function(){
+        for (var id in Data.Upgrades){
+            if (!Player.Upgrades[id].revealed){
+                Interface.HideUpgrade(id);
+            }
+        }
+    }
 }
+
 
 function SelectTab(tab){
     if (!$("#tab_" + tab).hasClass("selected")){

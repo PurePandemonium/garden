@@ -27,7 +27,7 @@ Data.InitializeTools = function(){
     t.baseCost = 10;
     t.income = 1;
     
-    t.CheckUnlockCond = function(){return Player.cards > t.baseCost};
+    t.CheckUnlockCond = function(){return Player.cards > this.baseCost};
     Data.Tools[t.id] = t;
     if(Player.Tools[t.id] == undefined) {
         Player.Tools[t.id] = new Data.PlayerTool(t.id);

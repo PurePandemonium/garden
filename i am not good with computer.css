@@ -36,6 +36,9 @@ div.tab {
 	border-left: 1px solid black;
 	margin-left: 10px;
 	padding-left: 10px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 div.tab:hover {
@@ -59,7 +62,6 @@ div .panes_wrapper{
 
 button {
     cursor: pointer;
-
 }
 
 

@@ -161,3 +161,14 @@ function Autosave(){
 function HasAchievement(chievo){
     return true;
 }
+
+function Reset(prompt){
+    if (!prompt || confirm("Erase all progress and start over?")){
+        Player = new Game();
+        RefreshResources();
+        Data.InitializeUpgrades();
+        Data.InitializeTools();
+        Interface.RefreshTools();
+        Interface.RefreshUpgrades();
+    }
+}
