@@ -158,8 +158,8 @@ function SelectTab(tab){
 }
 function Notify(text){
     var currentdate = new Date(); 
-    var time = currentdate.getHours() + ":" + currentdate.getMinutes();
     var autoscroll = false;
+    var time = currentdate.getHours() + ":" + (currentdate.getMinutes()<10?'0':'') + currentdate.getMinutes();
     console.log(text);
     
     var log = document.getElementById("gamelog");
