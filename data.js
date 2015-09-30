@@ -92,7 +92,7 @@ Data.InitializeTools = function() {
     t = new Data.Tool("Card Factory", 'factory');
     t.baseCost = 50000;
     t.income = 864;
-    t.Income = function(){return t.income + t.income * Player.Upgrades['factory_up1'].owned};
+    //t.Income = function(){return t.income + t.income * Player.Upgrades['factory_up1'].owned};
     t.CheckUnlockCond = function(){return Player.Tools['alchemist'].count > 0};
     Data.Tools[t.id] = t;
     if(Player.Tools[t.id] == undefined) {

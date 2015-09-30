@@ -100,12 +100,13 @@ function CurrentCost(tool){
 }
 
 function CheckWin(){
-	if (Player.income > 30000){
+	if (Player.income > 30000 && !Player.haswon){
+        Player.haswon = true;
 		alert("You win!");
         Notify("Congratulations, traveler! You won the game!");
 		Player.cards = Infinity;
-		//Player.income = 0;
-		//clearInterval(gameLoopInterval);
+		Player.income = 0;
+		clearInterval(gameLoopInterval);
 		//for (var k in Player.Tools){
 		//	Player.Tools[k].locked = true;
 		//	Interface.Hide(k);		
@@ -149,11 +150,11 @@ function LoadGame() {
     Notify("Game Loaded. Welcome back, traveler.");
 }
 
-var saveCountdown = 30;
+var saveCountdown = 60;
 function Autosave(){
     if (saveCountdown <= 0){
         SaveGame();
-        saveCountdown = 30;
+        saveCountdown = 60;
     }
     else {
         saveCountdown--;
