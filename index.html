@@ -2,23 +2,54 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="i am not good with computer.css" />
+<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Oxygen+Mono' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="cards.js"></script>
 <script type="text/javascript" src="interface.js"></script>
-
+<script type="text/javascript" src="data.js"></script>
+<script type="text/javascript" src="analytics.js"></script>
 
 </head>
 <body>
+<div id="main_wrapper">
+    <div id="info_tabs" class="tab_header">
+        <div id="tab_notifications" class="tab">Notifications</div>
+        <div id="tab_about" class="tab">About</div>
+        <div id="tab_config" class="tab">Settings</div>
+    </div>
+    <div id="info_panes" class="panes_wrapper">
+        <div id="pane_notifications" class="pane">
+            <div id="gamelog"></div>
+        </div>
+        <div id="pane_about" class="pane">
+            <p>Feedback? Send an email to garden@budgieparfait.com</p>
+        </div>
+        <div id="pane_config" class="pane">
+            <p>Options and stuff. Reset button??</p>
+            <button onclick="Reset(true)">Reset Game</button>
+        </div>
+    </div>
 
-
-<button onclick="CollectCard()">Collect Card!</button>
-<div id="info">
-<div id="stat_cards"></div>
-<div id="stat_income"></div>
-<div id="tools">Tools here</div>
-
-
-
+    <div id="tools_wrapper" class="column">
+        <button onclick="CollectCard()">Collect Card!</button>
+        <div id="info">
+            <div id="card_count">
+                <img src="images\icon budgieparfait card.png">
+                <span id="stat_cards"></span>
+            </div>
+            <div id="stat_income"></div>
+            <div id="goal_income">GOAL: 30,000 C/s</div>
+            <div id="tools">Tools here</div>
+        </div>
+    </div>
+    <div id="upgrades_wrapper" class="column" style="display: none;>
+        Upgrades go Here
+        <div id="upgrades_pane">
+        </div>
+    </div>
 </div>
+
+
 </body>
 </html>

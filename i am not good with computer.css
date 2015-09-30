@@ -1,21 +1,86 @@
-/* Here we go */
+body
+{
+background-image:url('./images/redox_01.png');
+/* Thanks Hendrik Lammers and SubtlePatterns.com */
+}
 div .toolBox {
-	border: 1px solid black;
-	width: 50%
+    border: 1px solid black;
+    width: 100%;
+    margin: 3px;
+    padding: 1px;
 }
 
- .toolTotal{
-	margin-left: 10px;
+div .toolTotal{
+    margin-left: 10px;
+}
 
- }
- 
- 
- 
- .hidden{
-	display: none;
- }
- 
- 
- 
- 
- 
+div .hidden{
+    display: none;
+}
+
+div .column{
+    width: 30%;
+    float: left;
+    margin:10px;
+}
+
+div .tab_header{
+    height:20px;
+    padding-bottom: 5px;
+}
+
+div.tab {
+	font-size: 18px;
+	cursor: pointer;
+	float: left;
+	border-left: 1px solid black;
+	margin-left: 10px;
+	padding-left: 10px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+div.tab:hover {
+	text-decoration: underline;
+}
+
+div.tab:first-child {
+	border-left: none;
+}
+
+div.tab.selected{
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+div .panes_wrapper{
+    width: 30%;
+    float: left;
+    margin:10px;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+#main_wrapper{
+    margin: auto;
+    padding: 20px 0 0 20px;
+    position: relative;
+}
+#gamelog{
+    top: 20px;
+    height: 700px;
+    overflow: auto;
+    border: 1px solid black;
+}
+
+#tools_wrapper{
+
+}
+
+#stat_cards{
+    font-family: 'Oxygen Mono', sans-serif;
+}
