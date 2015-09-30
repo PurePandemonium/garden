@@ -100,7 +100,7 @@ function CurrentCost(tool){
 }
 
 function CheckWin(){
-	if (Player.income > 30000 && !Player.haswon){
+	if (Player.income > 3000000 && !Player.haswon){
         Player.haswon = true;
 		alert("You win!");
         Notify("Congratulations, traveler! You won the game!");
