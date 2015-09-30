@@ -102,13 +102,14 @@ function CurrentCost(tool){
 function CheckWin(){
 	if (Player.income > 30000){
 		alert("You win!");
+        Notify("Congratulations, traveler! You won the game!");
 		Player.cards = Infinity;
-		Player.income = 0;
-		clearInterval(gameLoopInterval);
-		for (var k in Player.Tools){
-			Player.Tools[k].locked = true;
-			Interface.Hide(k);		
-		}
+		//Player.income = 0;
+		//clearInterval(gameLoopInterval);
+		//for (var k in Player.Tools){
+		//	Player.Tools[k].locked = true;
+		//	Interface.Hide(k);		
+		//}
 		RefreshResources();		
 	}
 }
@@ -124,7 +125,8 @@ function SaveGame() {
 
 function LoadGame() {
     if (!localStorage['player']){
-        Notify("New game started. Hello, traveller!");
+        Notify("New game started. Hello, traveler!");
+        Player = new Game();
         Player.version = VERSION;
         return;
     }
@@ -136,7 +138,7 @@ function LoadGame() {
     if (saveData.version == undefined) {
         Reset();
         Player.version = VERSION;
-        Notify("New game started. Hello, traveller!");
+        Notify("New game started. Hello, traveler!");
         return;
     } 
     
@@ -144,7 +146,7 @@ function LoadGame() {
     for (var i in Player){
         Player[i] = saveData[i];
     }
-    Notify("Game Loaded. Welcome back, traveller.");
+    Notify("Game Loaded. Welcome back, traveler.");
 }
 
 var saveCountdown = 30;

@@ -130,6 +130,7 @@ var Interface = {
             if (Player.Tools[id].locked){
                 Interface.Hide(id);
             }
+            RefreshTool(id);
         }
     },
     

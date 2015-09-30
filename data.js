@@ -22,11 +22,13 @@ Data.PlayerTool = function(Identifier) {
     this.locked = true;
 }
 
-Data.InitializeTools = function(){
+
+
+
+Data.InitializeTools = function() {
     var t = new Data.Tool("Casual Player", 'player');
     t.baseCost = 10;
     t.income = 1;
-    
     t.CheckUnlockCond = function(){return Player.cards > this.baseCost};
     Data.Tools[t.id] = t;
     if(Player.Tools[t.id] == undefined) {
@@ -78,11 +80,38 @@ Data.InitializeTools = function(){
         Player.Tools[t.id] = new Data.PlayerTool(t.id);
     }
     
-    t = new Data.Tool("Card Factory", 'factory');
+    t = new Data.Tool("Alchemist", 'alchemist');
     t.baseCost = 10000;
     t.income = 216;
-    t.Income = function(){return t.income + t.income * Player.Upgrades['factory_up1'].owned};
     t.CheckUnlockCond = function(){return Player.Tools['big_printer'].count > 0};
+    Data.Tools[t.id] = t;
+    if(Player.Tools[t.id] == undefined) {
+        Player.Tools[t.id] = new Data.PlayerTool(t.id);
+    }
+    
+    t = new Data.Tool("Card Factory", 'factory');
+    t.baseCost = 50000;
+    t.income = 864;
+    t.Income = function(){return t.income + t.income * Player.Upgrades['factory_up1'].owned};
+    t.CheckUnlockCond = function(){return Player.Tools['alchemist'].count > 0};
+    Data.Tools[t.id] = t;
+    if(Player.Tools[t.id] == undefined) {
+        Player.Tools[t.id] = new Data.PlayerTool(t.id);
+    }
+    
+    t = new Data.Tool("Wizard", 'wizard');
+    t.baseCost = 100000;
+    t.income = 1296;
+    t.CheckUnlockCond = function(){return Player.Tools['factory'].count > 0};
+    Data.Tools[t.id] = t;
+    if(Player.Tools[t.id] == undefined) {
+        Player.Tools[t.id] = new Data.PlayerTool(t.id);
+    }
+    
+    t = new Data.Tool("Card Planet", 'earth');
+    t.baseCost = 500000;
+    t.income = 5184;
+    t.CheckUnlockCond = function(){return Player.Tools['wizard'].count > 0};
     Data.Tools[t.id] = t;
     if(Player.Tools[t.id] == undefined) {
         Player.Tools[t.id] = new Data.PlayerTool(t.id);
