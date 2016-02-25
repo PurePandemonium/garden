@@ -27,8 +27,10 @@ Data.PlayerTool = function(Identifier) {
 
 Data.InitializeTools = function() {
     var t = new Data.Tool("Casual Player", 'player');
+    t.desc = "Increases income of Casual Players for each one you buy!";
     t.baseCost = 10;
-    t.income = 1;
+    t.income = 0;
+    t.Income = function() {return Player.Tools[this.id].count};
     t.CheckUnlockCond = function(){return Player.cards > this.baseCost};
     Data.Tools[t.id] = t;
     if(Player.Tools[t.id] == undefined) {
@@ -45,8 +47,19 @@ Data.InitializeTools = function() {
     }
     
     t = new Data.Tool("Collector's Club", 'club');
+    t.desc = "Income doubled for each Producer count that is a multiple of 5";
     t.baseCost = 100;
     t.income = 6;
+    t.Income = function() {
+        var income = 6;
+        for (var id in Player.Tools) {
+            if (Player.Tools[id].count % 5 == 0) {
+                income *= 2;
+            }
+        }
+        return income;
+    };
+    
     t.CheckUnlockCond = function(){return Player.Tools['shark'].count > 0};
     Data.Tools[t.id] = t;
     if(Player.Tools[t.id] == undefined) {

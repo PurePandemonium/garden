@@ -16,7 +16,7 @@ function InitializeToolInterface(){
 			
 			.attr('id', 'toolBtn_' + id)
 			.attr('onClick',"BuyTool('" + id + "')")
-			.text("Buy 1 " + Tool.name);
+			.text("Buy");
 				
 		var $toolPrice = $('<span>')
 			.addClass('price')
@@ -44,9 +44,9 @@ function InitializeToolInterface(){
 
 function RefreshTool(tool_id){
 	var Tool = Player.Tools[tool_id];
-	$("#cost_"+tool_id).text("(" + Math.round(Tool.curCost) + " cards)");
-	$("#total_"+tool_id).text("Total: " + Tool.count);
-	$("#income_per_" + tool_id).text("Produces: " + Data.Tools[tool_id].Income() + " C/s");
+	$("#cost_"+tool_id).text(" (" + Math.round(Tool.curCost) + " cards)");
+	$("#total_"+tool_id).text("Count: " + Tool.count);
+	$("#income_per_" + tool_id).text("Each Produces: " + Data.Tools[tool_id].Income() + " C/s");
 	$("#total_income_" + tool_id).text("Income: " + Data.Tools[tool_id].Income() * Tool.count + " C/s");
     if (Tool.revealed){
         Interface.Reveal(tool_id);
@@ -140,6 +140,17 @@ var Interface = {
                 Interface.HideUpgrade(id);
             }
         }
+    },
+    
+    CheckBuyables: function() {
+        for (var id in Data.Tools){
+            if (Player.cards > Player.Tools[id].curCost) {
+                $("#toolBtn_" + id).prop("disabled",false);
+            } else {
+                $("#toolBtn_" + id).prop("disabled",true);
+            }
+        }
+    
     }
 }
 

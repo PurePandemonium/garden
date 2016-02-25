@@ -39,8 +39,9 @@ function BuyTool(tool_id){
 			Player.cards -= price;
 			pt.count++;
 			pt.curCost *= 1.15;
-			Player.income += dt.Income();
-			RefreshTool(tool_id);
+            CalculateIncome();
+			//Player.income += dt.Income();
+			Interface.RefreshTools();
 			RefreshResources();
 			UnlockTools();
             UnlockUpgrades();
@@ -72,6 +73,7 @@ function GameStep(){
 		Player.Tools["player"].locked = false;
 		Interface.Reveal("player");
 	}
+    Interface.CheckBuyables();
 	CheckWin();
 	Autosave();
 }
@@ -98,6 +100,16 @@ function CurrentCost(tool){
     var cost = Player.Tools[tool].count * Data.Tools[tool].cost ^ toolCostMultiplier;
     return cost;
 }
+
+function CalculateIncome() {
+    var income = 0;
+    for (var id in Player.Tools) {
+        income += Data.Tools[id].Income() * Player.Tools[id].count;
+    }
+    Player.income = income;
+
+}
+
 
 function CheckWin(){
 	if (Player.income > 3000000 && !Player.haswon){
